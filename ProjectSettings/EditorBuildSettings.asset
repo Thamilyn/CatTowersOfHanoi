@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MyScenes/MainPuzzle.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/MyScenes/WinScene.unity
+    guid: 17d21f9125779b342ba5566d482874e1
   m_configObjects: {}
