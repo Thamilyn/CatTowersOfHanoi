@@ -25,7 +25,8 @@ public class DoorsPuzzleManager : MonoBehaviour
         if (isDone && !isPuzzleDone) { 
             isPuzzleDone= true;
             audioSrc.Play();
-        } else if (!isDone)
+        } 
+        else if (!isDone)
         {
             isPuzzleDone = false;
         }

@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MyScenes/MainPuzzle.unity
+    path: Assets/Scenes/MA04_Level3.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/MyScenes/WinScene.unity
+    path: Assets/Scenes/WinScene.unity
     guid: 17d21f9125779b342ba5566d482874e1
+  - enabled: 1
+    path: Assets/Scenes/MA03_MainPuzzle.unity
+    guid: e5faeceb9a3d6c042a3a3b7934a96f52
+  - enabled: 1
+    path: Assets/Scenes/MA02_Level1.unity
+    guid: a04076007570623409a49b6a4585b435
   m_configObjects: {}

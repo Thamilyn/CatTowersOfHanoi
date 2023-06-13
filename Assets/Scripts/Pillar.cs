@@ -1,0 +1,76 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Pillar : MonoBehaviour
+{
+    public bool hasOrb = false;
+    public Transform orbTransform;
+    public GameObject correctOrb;
+    private GameObject currentOrb;
+    private AudioSource audioSrc;
+   
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        audioSrc = GetComponent<AudioSource>();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // if the player is on area
+        // if it has an orb
+        if (other.CompareTag("Player"))
+        {
+            var pow = other.GetComponent<Pow>();
+            if (pow != null)
+            {
+                var orb = pow.GetCurrentOrb();
+                pow.IsOnPillarArea = true;
+                pow.intendedOrbToUse = orb;
+                pow.PillarToUse = gameObject;
+            }
+        }
+      
+    }
+
+    public GameObject GetPillarOrb() { return currentOrb; }
+    public bool HasOrb() { return hasOrb; }
+
+    //put the orb on top of the pillar
+    public void PutOrb(GameObject orb)
+    {
+        orb.transform.parent = transform;
+        orb.transform.position = orbTransform.position;
+        currentOrb = orb;
+        audioSrc.Play();
+        hasOrb = true;
+    }
+
+    // detect when the player exits the pillar interactive zone.
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            var pow = other.GetComponent<Pow>();
+            if (pow != null)
+            {
+                pow.IsOnPillarArea = false;
+                pow.PillarToUse = null;
+            }
+        }
+    }
+
+    public bool HasCorrectOrb()
+    {
+        return currentOrb == correctOrb;
+    }
+
+    //The pillar's orb reference is null
+    public void Release()
+    {
+        currentOrb = null;
+        hasOrb = false;
+    }
+}
