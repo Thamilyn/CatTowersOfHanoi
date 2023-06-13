@@ -30,4 +30,14 @@ public class Doors : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Moon") && !animator.GetBool("IsOpen"))
+        {
+            OpenDoor();
+            Destroy(collision.gameObject.transform.parent.gameObject);    
+        }
+    }
 }

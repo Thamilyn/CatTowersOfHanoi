@@ -46,24 +46,7 @@ public class Pow : MonoBehaviour
 
         if (Input.GetKeyDown("e"))
         {
-            // if we are interacting with a pillar
-            if (IsOnPillarArea && PillarToUse != null)
-            {
-                // if we have an orb, put it on top of the pillar
-                var pillar = PillarToUse.GetComponent<Pillar>();
-                if (carriedOrb != null)
-                {
-                    pillar.PutOrb(carriedOrb);
-                    ReleaseOrb();
-                }
-                // otherwise we grab the orb from the pillar
-                else
-                {
-                    GrabOrb(pillar.GetPillarOrb());
-                    pillar.Release();
-                }
-            }
-           
+            HandleOrbCollection();
         }
     }
 
@@ -80,7 +63,29 @@ public class Pow : MonoBehaviour
         {
             GrabOrb(hit.collider.gameObject);
         }
+    }
 
+    private void HandleOrbCollection()
+    {
+        // if we are interacting with a pillar
+        if (IsOnPillarArea && PillarToUse != null)
+        {
+            // if we have an orb, put it on top of the pillar
+            var pillar = PillarToUse.GetComponent<Pillar>();
+            if (carriedOrb != null && !pillar.HasOrb())
+            {
+                pillar.PutOrb(carriedOrb);
+                ReleaseOrb();
+            }
+            // otherwise we grab the orb from the pillar
+            else if (carriedOrb == null && pillar.HasOrb())
+            {
+                var orb = pillar.GetPillarOrb();
+                GrabOrb(orb);
+                pillar.Release();
+
+            }
+        }
     }
 
 

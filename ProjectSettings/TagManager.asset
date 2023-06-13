@@ -9,6 +9,13 @@ TagManager:
   - InteractButton
   - Plates
   - Rejas
+  - Orb
+  - ExplosiveDoor
+  - Jail
+  - Pillar
+  - TrackingObject
+  - Actors
+  - Moon
   layers:
   - Default
   - TransparentFX

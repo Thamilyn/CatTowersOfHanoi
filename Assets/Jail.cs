@@ -15,20 +15,17 @@ public class Jail : MonoBehaviour
         orbOriginalPos = orb.transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Restore()
     {
         // restore the jail by resetting the grid, the door and the orb to it's original positions
-        var pillar = orb.transform.parent.GetComponent<Pillar>();
-        if (pillar != null )
+        var orbParent = orb.transform.parent;
+        if (orbParent != null )
         {
-            pillar.Release();
+            var pillar = orb.transform.parent.GetComponent<Pillar>();
+            if (pillar != null) pillar.Release();
         }
+
         orb.transform.parent = transform;
         orb.transform.position = orbOriginalPos;
         reja.GetComponent<DoorExplosive>().Restore();   

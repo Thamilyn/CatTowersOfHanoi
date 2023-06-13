@@ -14,14 +14,7 @@ public class Pillar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSrc= GetComponent<AudioSource>();
-   
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        audioSrc = GetComponent<AudioSource>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -36,13 +29,12 @@ public class Pillar : MonoBehaviour
             p.IsOnPillarArea = true;
             p.intendedOrbToUse = orb;
             p.PillarToUse = gameObject;
-
-           
         }
       
     }
 
     public GameObject GetPillarOrb() { return currentOrb; }
+    public bool HasOrb() { return hasOrb; }
 
     //put the orb on top of the pillar
     public void PutOrb(GameObject orb)
@@ -74,5 +66,6 @@ public class Pillar : MonoBehaviour
     public void Release()
     {
         currentOrb = null;
+        hasOrb = false;
     }
 }
