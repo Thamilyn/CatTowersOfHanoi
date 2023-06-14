@@ -5,11 +5,13 @@ using UnityEngine.AI;
 
 public class CatController : MonoBehaviour
 {
-    public Camera cam;
+    [SerializeField]
+    private Camera cam;
+    [SerializeField]
+    private float catRadius = 2f;
+    public TowerOfHanoi towersController;
     private NavMeshAgent agent;
     private Animator animator;
-    public float catRadius = 2f;
-    public TowerOfHanoi towersController;
     private bool canMove = false;
     private GameObject currentDisk;
 

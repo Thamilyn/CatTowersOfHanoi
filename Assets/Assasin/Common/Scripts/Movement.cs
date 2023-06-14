@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 namespace Retro.ThirdPersonCharacter
 {
@@ -8,6 +9,11 @@ namespace Retro.ThirdPersonCharacter
     [RequireComponent(typeof(CharacterController))]
     public class Movement : MonoBehaviour
     {
+        [SerializeField]
+        private AudioClip[] FootstepAudioClips;
+        [SerializeField]
+        private AudioSource jumpSound;
+        private AudioSource walkSound;
         private Animator _animator;
         private PlayerInput _playerInput;
         private Combat _combat;
@@ -29,6 +35,7 @@ namespace Retro.ThirdPersonCharacter
             _playerInput = GetComponent<PlayerInput>();
             _combat = GetComponent<Combat>();
             _characterController = GetComponent<CharacterController>();
+            walkSound = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -57,9 +64,12 @@ namespace Retro.ThirdPersonCharacter
                 moveDirection = new Vector3(x, 0, y);
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection *= MaxSpeed;
-                if (_playerInput.JumpInput)
-                    moveDirection.y = jumpSpeed;
+                if (_playerInput.JumpInput) moveDirection.y = jumpSpeed;
+                
+                bool isMoving = x != 0 || y != 0;
+                if (isMoving) HandleWalkSound();
             }
+
 
             moveDirection.y -= gravity * Time.deltaTime;
             _characterController.Move(moveDirection * Time.deltaTime);
@@ -79,5 +89,16 @@ namespace Retro.ThirdPersonCharacter
             _animator.SetFloat("InputX", lastMovementInput.x);
             _animator.SetFloat("InputY", lastMovementInput.y);
         }
+
+        private void HandleWalkSound()
+        {
+            if (FootstepAudioClips.Length > 0 && !walkSound.isPlaying)
+            {
+                var index = Random.Range(0, FootstepAudioClips.Length);
+                walkSound.PlayOneShot(FootstepAudioClips[index]);
+            }
+        }
+
+
     }
 }

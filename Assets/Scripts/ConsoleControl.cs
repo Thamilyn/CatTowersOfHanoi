@@ -1,14 +1,14 @@
 using JetBrains.Annotations;
+using Retro.ThirdPersonCharacter;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ConsoleControl : MonoBehaviour
 {
-    public GameObject player;
+    [SerializeField]
+    GameObject player;
     public float consoleDistance = 3f;
-    //public Cinemachine.CinemachineVirtualCamera virtualCamera;
-    // public Cinemachine.CinemachineVirtualCamera playerCamera;
     [SerializeField]
     private Camera playerCamera;
     [SerializeField]
@@ -66,7 +66,8 @@ public class ConsoleControl : MonoBehaviour
         isCatCamActive = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        //cat.GetComponent<CatController>().EnableMove();
+        player.GetComponent<Movement>().enabled = false;
+        
         catController.EnableMove();
     }
 
@@ -80,5 +81,6 @@ public class ConsoleControl : MonoBehaviour
         isCatCamActive = false;
         Cursor.visible = false;
         catController.DisableMove();
+        player.GetComponent<Movement>().enabled = true;
     }
 }
