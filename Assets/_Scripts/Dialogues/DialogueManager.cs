@@ -22,17 +22,10 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         textReady = false;  
-        animator.SetBool("IsOpen", true);
+        if (animator != null ) animator.SetBool("IsOpen", true);
         sentences.Clear();
         foreach (var sentence in dialogue.sentences) sentences.Enqueue(sentence);
-        if (sentences.Count==1)
-        {
-            nextButtonText.text = "";
-        }
-        else
-        {
-            nextButtonText.text = "Continue>>";
-        }
+        if (nextButtonText != null) nextButtonText.text = sentences.Count == 1 ? "" : "Continue>>";
         
         dialogueName.text = dialogue.name;
         DisplayNextSentence();
@@ -47,7 +40,7 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
-        else if (sentences.Count == 1)
+        else if (sentences.Count == 1 && nextButtonText != null)
         {
             nextButtonText.text = "";
         }

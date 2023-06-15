@@ -1,24 +1,24 @@
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public class DialogueZoneScript : MonoBehaviour
 {
-    public DialogueTrigger dialogueTrigger;
-    public bool isItemDialogue = false;
-    public bool isTrigeredOnce = false;
-    public float timeToLive = 6.5f;
+    [SerializeField]
+    private DialogueManager dialogueManager;
+    [SerializeField]
+    private DialogueTrigger dialogueTrigger;
+    [SerializeField]
+    private bool isTrigeredOnce = false;
+    [SerializeField]
+    private float timeToLive = 6.5f;
     private float liveTimer = 0;
     private bool isOnArea = false;
-    private DialogueManager dialogueManager;
     private int openCounter = 0;
     public enum DialogueType
     {
         Zone,LoreItem
     }
     public DialogueType dialogueType= DialogueType.Zone;
-    private void Start()
-    {
-        dialogueManager = FindObjectOfType<DialogueManager>();
-    }
 
     private void Update()
     {
@@ -31,12 +31,12 @@ public class DialogueZoneScript : MonoBehaviour
                 }
                 break;
             case DialogueType.LoreItem:
-                if (timeToLive> 0 && dialogueManager.IsOpen() && isOnArea) 
+                if (timeToLive > 0 && dialogueManager.IsOpen() && isOnArea) 
                 {
                     liveTimer += Time.unscaledDeltaTime;
                     if (liveTimer >= timeToLive )
-                    {                    
-                        dialogueManager.EndDialogue();
+                    {
+                        EndDialogue();
                         liveTimer = 0;
                     }
                 }
@@ -60,7 +60,7 @@ public class DialogueZoneScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && !isItemDialogue)
+        if (other.CompareTag("Player"))
         {
             isOnArea = false;
             EndDialogue();
