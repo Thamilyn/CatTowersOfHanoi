@@ -1,0 +1,11 @@
+Model Information:
+* title:	Aztec Throne
+* source:	https://sketchfab.com/3d-models/aztec-throne-db646b285a6044db99e33116c1927111
+* author:	arnaud.sgz (https://sketchfab.com/arnaud.sougnez)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Aztec Throne" (https://sketchfab.com/3d-models/aztec-throne-db646b285a6044db99e33116c1927111) by arnaud.sgz (https://sketchfab.com/arnaud.sougnez) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

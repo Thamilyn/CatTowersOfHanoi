@@ -4,6 +4,8 @@ using UnityEngine.Scripting;
 public class DialogueZoneScript : MonoBehaviour
 {
     [SerializeField]
+    private AudioSource dialogueSound;
+    [SerializeField]
     private DialogueManager dialogueManager;
     [SerializeField]
     private DialogueTrigger dialogueTrigger;
@@ -34,8 +36,9 @@ public class DialogueZoneScript : MonoBehaviour
                 if (timeToLive > 0 && dialogueManager.IsOpen() && isOnArea) 
                 {
                     liveTimer += Time.unscaledDeltaTime;
-                    if (liveTimer >= timeToLive )
+                    if (liveTimer >= timeToLive || Input.GetMouseButtonDown(1))
                     {
+                        isOnArea = false;
                         EndDialogue();
                         liveTimer = 0;
                     }
@@ -55,12 +58,13 @@ public class DialogueZoneScript : MonoBehaviour
             isOnArea = true;
             dialogueTrigger.TriggerDialogue();
             openCounter++;
+            if (dialogueSound != null) dialogueSound.Play();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && dialogueType == DialogueType.Zone)
         {
             isOnArea = false;
             EndDialogue();
