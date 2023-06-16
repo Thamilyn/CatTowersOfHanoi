@@ -55,7 +55,7 @@ public class CatController : MonoBehaviour
                     {
                        currentDisk = towersController.PopDisk(towerIndex);
                        if (currentDisk!= null)
-                        {   
+                        {
                             //the cat takes the upper disk of the tower
                             SoundManager.instance.PlaySoundEffect(2);
                             currentDisk.transform.parent = transform;
@@ -71,6 +71,7 @@ public class CatController : MonoBehaviour
                         if (isDiskReleased)
                         {
                             SoundManager.instance.PlaySoundEffect(3);
+                            currentDisk.GetComponent<DiskScript>().EmitParticles();
                             currentDisk = null;
                         }
                         // if the disk can't be put on the tower
