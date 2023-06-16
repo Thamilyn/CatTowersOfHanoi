@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject dialogueBox;
     public TextMeshProUGUI dialogueName;
     public TextMeshProUGUI description;
     public Animator animator;
@@ -21,6 +23,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        if (dialogueBox != null) dialogueBox.SetActive(true);   
         textReady = false;  
         if (animator != null ) animator.SetBool("IsOpen", true);
         sentences.Clear();
@@ -61,6 +64,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+        if (dialogueBox != null) dialogueBox.SetActive(false);
     }
 
     private IEnumerator TypeSentence(string sentence)

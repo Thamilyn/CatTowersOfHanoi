@@ -7,6 +7,7 @@ public class VictoryZone : MonoBehaviour
 {
     [SerializeField]
     private string levelToLoad;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

@@ -7,6 +7,8 @@ using UnityEngine.Playables;
 public class PuzzleLogic : MonoBehaviour
 {
     [SerializeField]
+    private LevelTimer levelTimer;
+    [SerializeField]
     private Pillar[] pillars;
     [SerializeField]
     private GameObject doorToOpen;
@@ -26,6 +28,7 @@ public class PuzzleLogic : MonoBehaviour
             .ToArray();
         doorComponent = doorToOpen.GetComponent<Doors>();
         pillarsToSolve = pillars.Length;
+        levelTimer.StartTimer();
     }
 
     
@@ -47,6 +50,7 @@ public class PuzzleLogic : MonoBehaviour
         // if we solved the puzzle open the doors and set the puzzle as solved
         if (correctPillars == pillarsToSolve && !itsSolved)
         {
+            levelTimer.StopTimer();
             itsSolved = true;
             playableDirector.Play();
             //doorComponent.OpenDoor();

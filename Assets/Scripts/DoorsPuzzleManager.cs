@@ -5,6 +5,8 @@ using System.Linq;
 
 public class DoorsPuzzleManager : MonoBehaviour
 {
+    [SerializeField]
+    private LevelTimer levelTimer;
     private Reja[] rejas;
     private AudioSource audioSrc;
     private bool isPuzzleDone = false;
@@ -24,6 +26,7 @@ public class DoorsPuzzleManager : MonoBehaviour
         var isDone = CheckAllRejasOpen();
         if (isDone && !isPuzzleDone) { 
             isPuzzleDone= true;
+            levelTimer.StopTimer();
             audioSrc.Play();
         } 
         else if (!isDone)

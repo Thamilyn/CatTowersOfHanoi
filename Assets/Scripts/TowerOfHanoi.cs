@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class TowerOfHanoi : MonoBehaviour
 {
+    [SerializeField]
+    private LevelTimer levelTimer;
     public int numberOfDisks = 3;
     public GameObject diskPrefab;
     public GameObject[] towers;
@@ -21,7 +23,8 @@ public class TowerOfHanoi : MonoBehaviour
 
     void Start()
     {
-       //use stack data structure to keep track of the relationship between the disks and the towers
+        levelTimer.StartTimer();
+        //use stack data structure to keep track of the relationship between the disks and the towers
         disks = new Stack<GameObject>[3];
         var tower0Pos = towers[0].transform.position;
         for (int i = 0; i < 3; i++)
@@ -51,6 +54,7 @@ public class TowerOfHanoi : MonoBehaviour
         if (disks[towers.Length-1].Count == numberOfDisks && !isGameDone)
         {
             isGameDone= true;
+            levelTimer.StopTimer();
             SoundManager.instance.PlaySoundEffect(0);
             bridge.GetComponent<Animator>().SetBool("IsBridgeUp", true);
             bridge.GetComponent<AudioSource>().Play();
